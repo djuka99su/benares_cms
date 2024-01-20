@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Poppins:wght@300&display=swap');
+
+.body{
+    min-height: 70vh;
+    background-color: #0B1517;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.borderTextContainer {
+    position: relative;
+    border: 1px solid #fff; /* Set your border style */
+    padding: 10px; /* Set your padding */
+    width: 75%;
+    min-height: 40vh;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .borderTextContainer::before {
+    content: "Benares";
+    position: absolute;
+    top: -58px; /* Adjust the top position as needed */
+    left: 50%; /* Center the text horizontally */
+    transform: translateX(-50%); /* Center the text horizontally */
+    background-color: #0B1517;
+    color: #fff;
+    font-size: 4rem;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 10px;
+    padding: 0 20px; /* Adjust padding as needed */
+  }
+
+
+  .items {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    color: #fff;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+  }
+
+
+
+  .footerInfo {
+    width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    font-size: 1.4rem;
+    justify-content: space-between ;
+    flex-wrap: wrap;
+    color: rgb(234, 88, 12);
+  }
+
+  .footerParagraph{
+    margin-left: 4rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .footerLinks {
+    margin-right: 4rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footerLink {
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border-radius: 5px;
+    border: 1px solid rgb(234, 88, 12);
+  }
+
+  .footerLink:hover {
+    background-color: rgb(234, 88, 12);
+    color: #0B1517;
+  }
+
+
+  @media (max-width: 1200px){
+    .borderTextContainer{
+      min-height: 50vh;
+    }
+
+    .items {
+      font-size: 1rem;
+    }
+
+    .footerInfo {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .footerParagraph{ 
+      margin: 0;
+      margin-bottom: 2rem;
+    }
+    .footerLinks{
+      margin: 0;
+    }
+
+  }

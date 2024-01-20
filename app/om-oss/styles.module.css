@@ -1,0 +1,28 @@
+.body{
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.bgImage{
+    min-height: 100vh;
+    min-width: 100vw;
+    position: fixed;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .containerOne {
+    width: 90vw;
+    height: 70vh;
+    background-color: #0b1517;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    margin: auto;
+    position: relative;
+    top: 7rem;
+
+    border-radius: 0.5rem;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
