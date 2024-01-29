@@ -1,16 +1,14 @@
 import React from "react";
-import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const RemoveBtn = ({ id }) => {
-  const router = useRouter();
+const RemoveBtnCategory = ({ id }) => {
   const handleRemove = async () => {
     const confirmed = confirm("Are you sure?");
 
     if (confirmed) {
       const res = await fetch(
-        `http://localhost:3000/api/categories/items?id=${id}`,
+        `http://localhost:3000/api/categories?id=${id}`,
         {
           method: "DELETE",
         }
@@ -24,15 +22,13 @@ const RemoveBtn = ({ id }) => {
   };
 
   return (
-    <div>
       <button
         onClick={handleRemove}
         className="text-red-600 transition-transform text-2xl duration-200 ease-in-out hover:scale-110"
       >
         <FontAwesomeIcon icon={faTrash} />
       </button>
-    </div>
   );
 };
 
-export default RemoveBtn;
+export default RemoveBtnCategory;

@@ -19,7 +19,7 @@ const Infobar = () => {
     });
 
     return () => {listen();}
-  });
+  },[]);
 
   return (
     <div className={styles.infoBar}>

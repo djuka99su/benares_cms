@@ -8,7 +8,7 @@ import { Toaster, toast } from "sonner";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword , onAuthStateChanged, sendEmailVerification, ver } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -17,17 +17,6 @@ const page = () => {
 
   const router = useRouter();
 
-  const notifyEmail = () => {
-    toast.info("admin@gmail.com");
-  };
-  const notifyPassword = () => {
-    toast.info("R#9aLp2qFv$5sJ8");
-  };
-
-  const notify = () => {
-    notifyEmail();
-    notifyPassword();
-  };
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -36,20 +25,21 @@ const page = () => {
       }
     });
 
+
     return () => {
       listen();
     };
   }, []);
 
-  const signIn = (e) => {
+  const signUp = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    const user = await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        router.push("/");
       })
       .catch((err) => {
         console.log(err);
       });
+
   };
 
   return (
@@ -57,13 +47,10 @@ const page = () => {
       <Image src={bgImage} alt="Loading..." className={styles.bgImageLogin} />
       <div className={styles.container}>
         <h2 className="text-orange-600 text-center text-6xl mb-5 p-4 font-bold">
-          Logg inn
+          Opprett konto
         </h2>
-        <button className="text-white hover:text-orange-600" onClick={notify}>
-          Klikk her for å se admin user
-        </button>
         <form
-          onSubmit={signIn}
+          onSubmit={signUp}
           className="flex flex-col gap-6 mb-6 rounded p-10"
         >
           <div className="flex flex-col gap-1 text-center">
@@ -99,25 +86,11 @@ const page = () => {
           </div>
           <button
             type="submit"
-            className="text-white bg-orange-600 rounded p-2 w-24 m-auto"
+            className="text-white bg-orange-600 rounded p-2 w-36 m-auto"
           >
-            Logg inn
+            Opprett konto
           </button>
         </form>
-        <div className="flex gap-2">
-          <a
-            href="/reset-password"
-            className="text-white hover:text-orange-600  p-4"
-          >
-            Glemt passord?
-          </a>
-          <a
-            href="/registration"
-            className="text-white hover:text-orange-600 underline  p-4"
-          >
-            Opprett en konto
-          </a>
-        </div>
       </div>
       <Toaster />
     </div>

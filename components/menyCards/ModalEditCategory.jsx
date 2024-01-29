@@ -1,26 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
-const ModalCategory = ({ modal, closeModal  }) => {
-  const [createName, setCreateName] = useState("");
-  const router = useRouter();
+const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
+  const [name, setName] = useState("");
+  const [ID, setID] = useState("")
+
+  useEffect(() => {
+    setName(categoryTitle);
+    setID(id)
+  }, [categoryTitle]);
 
   const handleClose = () => {
     closeModal();
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/api/categories", {
-        method: "POST",
+      const res = await fetch(`http://localhost:3000/api/categories/${ID}`, {
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title: createName }),
+        body: JSON.stringify({ newTitle: name }),
       });
 
       if (res.ok) {
@@ -54,7 +57,7 @@ const ModalCategory = ({ modal, closeModal  }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Create New Category
+                  Edit Category
                 </h3>
                 <button
                   type="button"
@@ -96,8 +99,8 @@ const ModalCategory = ({ modal, closeModal  }) => {
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Type category name"
-                      value={createName}
-                      onChange={(e) => setCreateName(e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
@@ -106,7 +109,7 @@ const ModalCategory = ({ modal, closeModal  }) => {
                   type="submit"
                   className="text-white inline-flex items-center bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {(
+                  {
                     <svg
                       className="me-1 -ms-1 w-5 h-5"
                       fill="currentColor"
@@ -119,9 +122,9 @@ const ModalCategory = ({ modal, closeModal  }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  )}
+                  }
 
-                  {"Add new category"}
+                  {"Edit category"}
                 </button>
               </form>
             </div>
@@ -132,4 +135,4 @@ const ModalCategory = ({ modal, closeModal  }) => {
   );
 };
 
-export default ModalCategory;
+export default ModalEditCategory;

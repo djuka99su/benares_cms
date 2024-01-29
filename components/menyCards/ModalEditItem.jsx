@@ -1,42 +1,49 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 
-const ModalItem = ({ modal, closeModal, categories }) => {
-  const router = useRouter();
+const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDescr, defCategory, defAllergens, id }) => {
 
-  const [createName, setCreateName] = useState("");
-  const [createPrice, setCreatePrice] = useState("");
-  const [createDescr, setCreateDescr] = useState("");
+
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [descr, setDescr] = useState("");
   const [categoryState, setCategory] = useState("");
   const [allergensState, setAllergensState] = useState("");
-  const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState("Nothing");
+  const [imageEdit, setImageEdit] = useState(null);
+  const [imageNameEdit, setImageNameEdit] = useState("");
   const [button, setButton] = useState(true);
-  const [imgNameEql, setImgNameEql] = useState(false)
+  const [ID, setID] = useState("")
+
+
+  useEffect(() => {
+    setName(defName)
+    setPrice(defPrice)
+    setDescr(defDescr)
+    setCategory(defCategory)
+    setAllergensState(defAllergens)
+    setID(id)
+  }, [defName])
+
 
   const handleClose = () => {
     closeModal();
   };
 
 
-
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-    setImageName(e.target.value);
+    setImageEdit(e.target.files[0]);
+    setImageNameEdit(e.target.value);
   };
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!image) return;
+    if (!imageEdit) return;
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("image", imageEdit);
 
     try {
       const response = await fetch("http://localhost:3000/api/s3-upload", {
@@ -51,25 +58,27 @@ const ModalItem = ({ modal, closeModal, categories }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/categories/items", {
-        method: "POST",
+      const res = await fetch(`http://localhost:3000/api/categories/items/${ID}`, {
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
-        },
+        }, 
+
         body: JSON.stringify({
-          title: createName,
-          price: createPrice,
-          category: categoryState,
-          allergens: allergensState,
-          description: createDescr,
+          newTitle: name,
+          newPrice: price,
+          newCategory: categoryState,
+          newAllergens: allergensState,
+          newDescription: descr,
         }),
+
       });
 
       if (res.ok) {
         handleClose();
         window.location.reload();
       } else {
-        throw new Error("Faild to create a category");
+        throw new Error("Faild to edit Item");
       }
     } catch (error) {
       console.log(error);
@@ -101,7 +110,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {"Create New Product"}
+                  {"Edit Product"}
                 </h3>
                 <button
                   type="button"
@@ -135,7 +144,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Name
+                      Navn
                     </label>
                     <input
                       type="text"
@@ -143,8 +152,8 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder={ "Type product name"}
-                      value={createName}
-                      onChange={(e) => setCreateName(e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
@@ -179,8 +188,8 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       id="price"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Price in NOK"
-                      value={createPrice}
-                      onChange={(e) => setCreatePrice(e.target.value)}
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                       required
                     />
                   </div>
@@ -212,7 +221,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                   }
                   <div className="col-span-2 mt-2 text-center">
                     <label
-                      htmlFor="image"
+                      htmlFor="imageEdit"
                       className=" w-28  bg-orange-600 p-2 rounded   text-sm font-medium cursor-pointer  text-white"
                     >
                       Upload image{" "}
@@ -221,18 +230,19 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                     <input
                       className="sr-only"
                       onChange={handleImageChange}
-                      id="image"
-                      name="image"
+                      id="imageEdit"
+                      name="imageEdit"
                       type="file"
-                      accept="image/*"
+                      accept="imageEdit/*"
                     />
+                    
                     <span className="ml-2 text-gray-500 mt-2 mr-1 block">
-                      {imageName
-                        ? imageName.replace("C:\\fakepath\\", "")
+                      {imageNameEdit
+                        ? imageNameEdit.replace("C:\\fakepath\\", "")
                         : "No file chosen"}
                     </span>
-                    <span className={`ml-2 ${imgNameEql ?"text-green-500": " text-red-500"} mt-2 mr-1 block`}>
-                      {imgNameEql ? "Bildenavn og navn til matretten er likt" : "Bildenavn må være samme som navn til matretten"}
+                    <span className="ml-2 text-red-500 mt-2 mr-1 block">
+                      Bildenavn må være samme som navn til matretten
                     </span>
                   </div>
                   <div className="col-span-2">
@@ -247,9 +257,9 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       rows={4}
                       maxLength="120"
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      value={createDescr}
+                      value={descr}
                       placeholder="Description, max 120 char"
-                      onChange={(e) => setCreateDescr(e.target.value)}
+                      onChange={(e) => setDescr(e.target.value)}
                     />
                   </div>
                 </div>
@@ -272,7 +282,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                     </svg>
                   )}
 
-                  {"Add new product"}
+                  {"Edit product"}
                 </button>
               </form>
             </div>
@@ -283,4 +293,4 @@ const ModalItem = ({ modal, closeModal, categories }) => {
   );
 };
 
-export default ModalItem;
+export default ModalEditItem;

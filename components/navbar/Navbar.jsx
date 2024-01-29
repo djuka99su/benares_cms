@@ -28,86 +28,51 @@ const links = [
   },
 ];
 
-const getCategories = () => {
-  return fetch("http://localhost:3000/api/categories", {
-    cache: "no-store",
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Failed to fetch");
-      }
-      return res.json();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
 
 const Navbar = () => {
   const [categoryToggle, setCategoryToggle] = useState(false);
   const [scrolling, setScrolling] = useState(true);
-  const [dropdown, setDropdown] = useState(false);
-  const [dropdownTwo, setDropdownTwo] = useState(false);
-  const [modal, setModal] = useState(false);
-  const [modalItem, setModalItem] = useState(false);
-  const [modalRemove, setModalRemove] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [authUser, setAuthUser] = useState(false);
+  const [authUser, setAuthUser] = useState(null);
 
-  const pathName = usePathname();
   const router = useRouter();
 
   useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
+    const authStateChangedListener = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-      } else {
-        setAuthUser(null);
       }
     });
-
-    // window.scrollTo(0, 0);
-    getCategories().then((data) => setCategories(data.categories));
+  
     const handleScroll = () => {
-      // Check if the user has scrolled down by a certain amount (e.g., 100 pixels)
-      const isScrolled = window.scrollY === 0;
+      if (window.scrollY > 0) {
+        setScrolling(false);
+      } else {
+        setScrolling(true);
 
-      // Update the state based on the scroll position
-      setScrolling(isScrolled);
+      }
     };
-
-    // Attach the event listener when the component mounts
-    window.addEventListener("scroll", handleScroll);
-
-    // Remove the event listener when the component unmounts
+  
+    // Attach the scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    // Cleanup functions
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      listen();
+      authStateChangedListener(); // Remove the auth state change listener
+      window.removeEventListener('scroll', handleScroll); // Remove the scroll event listener
     };
-  }, []); //Scroll event
+  }, []);
+  
 
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
-        router.push("/login")
+        router.push("/login");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleArrowUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const closeModal = () => {
-    setModal(false);
-    setModalItem(false);
-    setModalRemove(false);
-  };
 
   return (
     <div
@@ -118,7 +83,7 @@ const Navbar = () => {
       <nav className={scrolling ? styles.navbar : styles.navbarScrolled}>
         <div>
           <a className={styles.logo} href="/" id="logo">
-            Benares
+            <span className="text-orange-600">Be</span>nares
           </a>
         </div>
         <button
@@ -149,131 +114,15 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          {authUser ? <button className={styles.navLink} onClick={userSignOut}>Logg ut</button>: <a  className={styles.navLink} href="/login">Logg in</a>}
-          {pathName === "/meny" && authUser && (
-            <div>
-              <button
-                id="dropdownHoverButton"
-                className="text-white mr-2 bg-orange-600  focus:ring-2 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-                type="button"
-                onMouseEnter={() => setDropdown(true)}
-                onMouseLeave={() => setDropdown(false)}
-              >
-                Category{" "}
-                <svg
-                  className="w-2.5 h-2.5 ms-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              <div
-                onMouseEnter={() => setDropdown(true)}
-                onMouseLeave={() => setDropdown(false)}
-                id="dropdownHover"
-                className={`z-10 ${
-                  !dropdown && "hidden"
-                } bg-white absolute divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:bg-opacity-80`}
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownHoverButton"
-                >
-                  <li>
-                    <a
-                      onClick={() => setModal(true)}
-                      className="block px-4 py-2 hover:bg-gray-700 hover:text-white cursor-pointer  "
-                    >
-                      Create Category
-                    </a>
-                  </li>
-                  <li>
-                    <a className="block px-4 py-2  cursor-pointer hover:bg-gray-700 hover:text-white">
-                      Edit Category
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      onClick={() => setModalRemove(true)}
-                      className="block px-4 py-2 = cursor-pointer hover:bg-gray-700 hover:text-white"
-                    >
-                      Delete Category
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          {authUser ? (
+            <button className={styles.navLink} onClick={userSignOut}>
+              Logg ut
+            </button>
+          ) : (
+            <a className={styles.navLink} href="/login">
+              Logg in
+            </a>
           )}
-          {pathName === "/meny" && authUser && (
-            <div>
-              <button
-                id="dropdownHoverButton"
-                className="text-white bg-orange-600  focus:ring-2 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-                type="button"
-                onMouseEnter={() => setDropdownTwo(true)}
-                onMouseLeave={() => setDropdownTwo(false)}
-              >
-                Item{" "}
-                <svg
-                  className="w-2.5 h-2.5 ms-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              <div
-                onMouseEnter={() => setDropdownTwo(true)}
-                onMouseLeave={() => setDropdownTwo(false)}
-                id="dropdownHover"
-                className={`z-10 ${
-                  !dropdownTwo && "hidden"
-                } bg-white absolute  divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:bg-opacity-80`}
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="dropdownHoverButton"
-                >
-                  <li>
-                    <a
-                      onClick={() => setModalItem(true)}
-                      className="block px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Create Item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="block px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white">
-                      Edit Item
-                    </a>
-                  </li>
-                  <li>
-                    <a className="block px-4 py-2 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white">
-                      Delete Item
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          )}
-          
         </div>
       </nav>
       <div className={categoryToggle ? styles.overlay : "hidden"}>
@@ -286,44 +135,20 @@ const Navbar = () => {
         <div className={styles.overlayLinks}>
           {links.map((link) => (
             <a key={link.name} href={link.href}>
-              <button
-                className={
-                  styles.navLink
-                }
-              >
-                {link.name}
-              </button>
+              <button className={styles.navLink}>{link.name}</button>
             </a>
           ))}
-          {authUser ? <button className={styles.navLink} onClick={userSignOut}>Logg ut</button>: <a  className={styles.navLink} href="/login">Logg in</a>}
+          {authUser ? (
+            <button className={styles.navLink} onClick={userSignOut}>
+              Logg ut
+            </button>
+          ) : (
+            <a className={styles.navLink} href="/login">
+              Logg in
+            </a>
+          )}
         </div>
       </div>
-
-      {/* {!scrolling && (
-        <button onClick={handleArrowUp}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className={styles.arrowButton}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 15.75l7.5-7.5 7.5 7.5"
-            />
-          </svg>
-        </button>
-      )} */}
-      <ModalCategory modal={modal} closeModal={closeModal} />
-      <ModalItem
-        modal={modalItem}
-        categories={categories}
-        closeModal={closeModal}
-      />
-      <ModalRemove modal={modalRemove} closeModal={closeModal} />
     </div>
   );
 };

@@ -27,9 +27,7 @@ const getItems = () => {
     });
 };
 
-const Carousel = ({
-  category
-}) => {
+const Carousel = () => {
   const [index, setIndex] = useState(1);
   const [items, setItems] = useState([]);
   const [authUser, setAuthUser] = useState(null);
@@ -44,12 +42,13 @@ const Carousel = ({
       }
     });
 
-    return () => {listen();}
+    return () => {
+      listen();
+    };
   }, []);
 
   const handleEdit = (e) => {
-    e.preventDefault();
-    window.location.reload();
+    console.log(e);
   };
 
   return (
@@ -79,33 +78,21 @@ const Carousel = ({
       >
         {items.map(
           (dish, i) =>
-            dish.category === category.title && (
+             (
               <SwiperSlide key={i}>
-                <div className={styles.slide}>
-                  <Image
-                    src={`/images/meny/img_${"0"}.webp`}
+                  <img
+                    className={styles.slideImage}
+                    src={`https://dishes-b-bucket.s3.eu-north-1.amazonaws.com/${dish.title.replace(
+                      " ",
+                      "+"
+                    )}.jpg`}
                     width={400}
                     height={600}
                     alt="Loading..."
                   />
+                <div className={styles.slide}>
                   <h3>{dish.title}</h3>
-                  <div className={styles.descrContainer}>
-                    <p>{dish.description}</p>
-                    <div className={styles.spanContainer}>
-                      <span>{dish.price} NOK</span>
-                      {authUser && (
-                        <button
-                          onClick={handleEdit}
-                          className="bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 rounded-sm px-4"
-                        >
-                          <FontAwesomeIcon icon={faPenToSquare} />
-                        </button>
-                      )}
-                      {authUser && <RemoveBtn id={dish._id} />}
-
-                      <span>{dish.allergens}</span>
-                    </div>
-                  </div>
+                  <p className="text-white">{dish.description}</p>
                 </div>
               </SwiperSlide>
             )

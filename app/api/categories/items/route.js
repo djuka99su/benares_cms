@@ -21,3 +21,4 @@ export async function DELETE (request){
   await Items.findByIdAndDelete(id);
   return NextResponse.json({massage : "Item deleted"}, {status: 200})
 }
+

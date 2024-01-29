@@ -119,25 +119,45 @@
 }
 
 .thirdSection {
-  /* background-color: #0B1517; */
-  /* background-image: url("../public/images/bgImage_04.jpg"); */
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #0B1517;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.thirdSection h2 {
-  font-size: 5rem;
-  font-weight: bold;
-  padding-top: 3rem;
-  text-align: center;
-  color: #0b1517;
-  font-family: "Roboto", sans-serif;
+.infoLinkMeny{
+  color: orangered;
+  margin-left: 5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  position: relative;
 }
+
+.infoLinkMeny::before {
+  transition: 300ms;
+  height: 1.5px;
+  content: "";
+  position: absolute;
+  background-color: orangered;
+  width: 0%;
+  bottom: 2px;
+}
+
+
+.infoLinkMeny:hover::before {
+  width: 100%;
+}
+
+.carouselContainer{
+  margin-top: 3rem;
+  width: 95vw;
+  min-height: 90vh;
+  padding: 2rem;
+  background-color: #0B1517;
+  border-radius: 1rem;
+}
+
+
 
 .fourthSection {
   min-height: 100vh;

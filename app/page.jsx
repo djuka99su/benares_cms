@@ -9,7 +9,7 @@ import { useEffect } from "react";
 export default function Home() {
   return (
     <div className={styles.body}>
-      <Image src={bgImage} alt="Loading..." className={styles.bgImage}/>
+      <Image src={bgImage} alt="Loading..." className={styles.bgImage} />
       <div className={styles.home}>
         <div className={styles.headingContainer}>
           <h1 className={styles.heading}>Benares</h1>
@@ -67,12 +67,20 @@ export default function Home() {
           <a href="/meny">VÅR MENY</a>
         </div>
       </div>
-      <div className={styles.thirdSection}></div>
-      <div className={styles.fifthSection}>
+      <div className={styles.thirdSection}>
+        <div className={styles.carouselContainer}>
+          <a href="/meny" className={styles.infoLinkMeny}>Se alle retter</a>
+          <h3 className="text-white text-6xl  mb-16 mt-2 ml-20 ">Våre retter</h3>
+          
+          <Carousel />
+        </div>
+        
+      </div>
+      {/* <div className={styles.fifthSection}>
         <div className={styles.fifthSectionCOntainer}>
           <button>LOYALTY</button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

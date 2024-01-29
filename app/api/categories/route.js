@@ -16,8 +16,9 @@ export async function GET (request){
 }
 
 export async function DELETE (request){
-  const title = request.nextUrl.searchParams.get("title");
+  const id = request.nextUrl.searchParams.get("id");
   await connectMongoDB();
-  await Categories.findOneAndDelete({ title: title })
+  await Categories.findByIdAndDelete(id);
   return NextResponse.json({massage : "Category deleted"}, {status: 200})
 }
+
