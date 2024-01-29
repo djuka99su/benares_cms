@@ -1,6 +1,6 @@
 "use client";
 
-import { React, useState, useEffect, use } from "react";
+import { React, useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
