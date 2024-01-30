@@ -19,6 +19,9 @@ import RemoveBtnCategory from "../../components/menyCards/RemoveBtnCategory";
 import ModalEditItem from "../../components/menyCards/ModalEditItem";
 import ModalEditCategory from "../../components/menyCards/ModalEditCategory";
 
+
+
+
 const Meny = () => {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -74,6 +77,8 @@ const Meny = () => {
       listen();
     };
   }, []);
+
+
 
   const handleImageClick = (e) => {
     setImageOverlay(true);
