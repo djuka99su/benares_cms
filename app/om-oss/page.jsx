@@ -1,13 +1,6 @@
-"use client";
-
 import React from "react";
-import bgImage from "../../public/images/bgImage_03.jpg";
-import Image from "next/image";
 import styles from "./styles.module.css";
-import img from "../../public/images/img_3.webp";
-import imgTwo from "../../public/images/img_4.webp";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+
 
 const page = () => {
   return (
