@@ -1,6 +1,7 @@
 const getItems = () => {
-  return fetch("http://localhost:3000/api/categories/items", {
+  return fetch("http://localhost:3000/api/categories/items",  {
     cache: "no-store",
+    mode: "no-cors"
   })
     .then((res) => {
       if (!res.ok) {
@@ -16,6 +17,7 @@ const getItems = () => {
 const getCategories = () => {
   return fetch("http://localhost:3000/api/categories", {
     cache: "no-store",
+    mode: "no-cors"
   })
     .then((res) => {
       if (!res.ok) {
