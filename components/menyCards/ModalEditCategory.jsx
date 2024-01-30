@@ -18,7 +18,7 @@ const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:3000/api/categories/${ID}`, {
+      const res = await fetch(`/api/categories/${ID}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

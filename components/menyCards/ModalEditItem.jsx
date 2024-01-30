@@ -46,7 +46,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
     formData.append("image", imageEdit);
 
     try {
-      const response = await fetch("http://localhost:3000/api/s3-upload", {
+      const response = await fetch("/api/s3-upload", {
         method: "POST",
         body: formData,
       });
@@ -58,7 +58,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/categories/items/${ID}`, {
+      const res = await fetch(`/api/categories/items/${ID}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

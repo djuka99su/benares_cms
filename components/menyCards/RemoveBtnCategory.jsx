@@ -8,7 +8,7 @@ const RemoveBtnCategory = ({ id }) => {
 
     if (confirmed) {
       const res = await fetch(
-        `http://localhost:3000/api/categories?id=${id}`,
+        `/api/categories?id=${id}`,
         {
           method: "DELETE",
         }

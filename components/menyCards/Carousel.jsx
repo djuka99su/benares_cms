@@ -13,7 +13,7 @@ import { auth } from "../../app/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const getItems = () => {
-  return fetch("http://localhost:3000/api/categories/items", {
+  return fetch("/api/categories/items", {
     cache: "no-store",
   })
     .then((res) => {

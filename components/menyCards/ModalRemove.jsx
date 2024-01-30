@@ -15,7 +15,7 @@ const ModalRemove = ({ modal, closeModal }) => {
 
     try {
         const res = await fetch(
-            `http://localhost:3000/api/categories?title=${categoryName}`,
+            `/api/categories?title=${categoryName}`,
             {
               method: "DELETE",
             }

@@ -15,7 +15,7 @@ const ModalCategory = ({ modal, closeModal  }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/api/categories", {
+      const res = await fetch("/api/categories", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

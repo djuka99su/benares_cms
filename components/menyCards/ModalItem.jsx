@@ -51,7 +51,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/categories/items", {
+      const res = await fetch("/api/categories/items", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
