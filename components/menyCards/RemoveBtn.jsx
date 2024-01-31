@@ -6,7 +6,7 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 const RemoveBtn = ({ id }) => {
   const router = useRouter();
   const handleRemove = async () => {
-    const confirmed = confirm("Are you sure?");
+    const confirmed = confirm("Er du sikker? Trykk ok hvis du vil slette elementet.");
 
     if (confirmed) {
       const res = await fetch(

@@ -151,7 +151,7 @@ const Meny = () => {
             className={ic === 0 ? styles.container : styles.containerTwo}
           >
             <div className="flex gap-2 flex-col md:flex-row">
-              <h2 className="p-4 text-6xl text-center md:text-left">
+              <h2 className="p-4 my-4 md:my-0 text-4xl md:text-6xl text-center md:text-left">
                 {category.title}
               </h2>
               {authUser && admin && (
@@ -171,21 +171,21 @@ const Meny = () => {
                 </div>
               )}
             </div>
-            <div className="p-6">
+            <div className="p-1 md:p-6 flex gap-4 md:gap-0 justify-center flex-wrap md:flex-col">
               {items.map(
                 (item, ii) =>
                   item.category === category.title && (
                     <div
                       key={ii}
-                      className={`flex flex-col md:flex-row justify-between ${
+                      className={`flex w-44 md:w-full flex-col md:flex-row justify-between ${
                         ii !== items.length - 1 &&
                         "border-b-2 border-slate-600 mb-6"
                       } pb-6`}
                     >
                       <div className="flex flex-col md:flex-row">
                         <img
-                          onClick={size ? handleImageClick : undefined}
-                          className={`w-96 h-56 md:w-48 md:h-32 m-auto md:mx-4 rounded ${
+                          onClick={handleImageClick}
+                          className={`w-full h-36 md:w-48 md:h-32 m-auto md:mx-4 rounded w ${
                             size
                               ? "cursor-pointer transition-transform duration-200 ease-in-out hover:scale-110"
                               : undefined
@@ -197,11 +197,11 @@ const Meny = () => {
                           alt="Loading..."
                         />
                         <div className="flex flex-col text-center md:text-left justify-between">
-                          <h3 className="text-orange-600 text-3xl font-bold my-4 md:my-0 md:text-2xl">
+                          <h3 className="text-orange-600 text-md font-bold my-2 md:my-0 md:text-2xl">
                             {item.title}
                           </h3>
-                          <div className="flex w-192 m-auto md:m-0 justify-between g-10">
-                            <p className="md:w-56 lg:w-96 my-2 md:my-0">
+                          <div className="flex m-auto md:m-0 justify-between g-10">
+                            <p className="md:w-56 lg:w-96 text-sm md:text-md my-2 md:my-0">
                               {item.description}
                             </p>
                           </div>
@@ -211,7 +211,7 @@ const Meny = () => {
                         <p className="font-bold underline w-48">
                           {item.price} NOK
                         </p>
-                        <p className="w-64"> Allergener: ({item.allergens})</p>
+                        <p className="w-64">({item.allergens})</p>
                       </div>
                       {authUser && admin && (
                         <div className="flex flex-row md:flex-col gap-2 justify-center px-10 mt-2 md:mt-0">
@@ -277,7 +277,7 @@ const Meny = () => {
         } h-screen bg-black bg-opacity-70 fixed top-0 z-30 flex justify-center items-center`}
         onClick={handleOverlayClose}
       >
-        <div className="w-3/5 h-4/5 text-right mb-8 rounded">
+        <div className="w-full h-2/5 md:w-3/5 md:h-4/5 text-right mb-8 rounded">
           <button
             onClick={() => setImageOverlay(false)}
             className="text-white m-right font-bold text-4xl relative top-12  rounded right-4  z-10 transition-transform duration-200 ease-in-out hover:scale-110"

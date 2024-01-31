@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Toaster, toast } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModalItem = ({ modal, closeModal, categories }) => {
   const router = useRouter();
@@ -14,25 +16,34 @@ const ModalItem = ({ modal, closeModal, categories }) => {
   const [categoryState, setCategory] = useState("");
   const [allergensState, setAllergensState] = useState("");
   const [image, setImage] = useState(null);
-  const [imageName, setImageName] = useState("Nothing");
-  const [button, setButton] = useState(true);
-  const [imgNameEql, setImgNameEql] = useState(false)
+  const [imageName, setImageName] = useState("Ingen opplastet bilde");
+  const [imgNameEql, setImgNameEql] = useState(false);
+  const [button, setButton] = useState(false);
 
   const handleClose = () => {
     closeModal();
   };
-
-
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
     setImageName(e.target.value);
   };
 
-  
+  useEffect(() => {
+    if (
+      createName === imageName.replace("C:\\fakepath\\", "").replace(".jpg", "")
+    ) {
+      setImgNameEql(true);
+    }
+  }, [imageName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!imgNameEql) {
+      toast.error("Bildenavn og navn til matretten er ikke likt. Dette må fikses!")
+      return
+    }
 
     if (!image) return;
     const formData = new FormData();
@@ -78,6 +89,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
 
   return (
     <>
+      <Toaster />
       {modal && (
         <div
           className="fixed inset-0 bg-black opacity-90 z-40"
@@ -101,7 +113,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {"Create New Product"}
+                  {"Opprett ny element"}
                 </h3>
                 <button
                   type="button"
@@ -135,14 +147,14 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Name
+                      Navn
                     </label>
                     <input
                       type="text"
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder={ "Type product name"}
+                      placeholder={"Skriv inn elementnavn"}
                       value={createName}
                       onChange={(e) => setCreateName(e.target.value)}
                       required
@@ -153,14 +165,14 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="allergens"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Allergens
+                      Allergener
                     </label>
                     <input
                       type="text"
                       name="allergens"
                       id="allergens"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder={"Allergens"}
+                      placeholder={"Allergener"}
                       value={allergensState}
                       onChange={(e) => setAllergensState(e.target.value)}
                       required
@@ -171,14 +183,14 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="price"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Price
+                      Pris
                     </label>
                     <input
                       type="number"
                       name="price"
                       id="price"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Price in NOK"
+                      placeholder="Pris i NOK"
                       value={createPrice}
                       onChange={(e) => setCreatePrice(e.target.value)}
                       required
@@ -190,7 +202,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                         htmlFor="category"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Category
+                        Kategori
                       </label>
                       <select
                         id="category"
@@ -200,7 +212,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                         required
                       >
                         <option value="" disabled hidden>
-                          Select Category
+                          Velg kategori
                         </option>
                         {categories.map((category, index) => (
                           <option key={index} value={category.title}>
@@ -215,7 +227,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="image"
                       className=" w-28  bg-orange-600 p-2 rounded   text-sm font-medium cursor-pointer  text-white"
                     >
-                      Upload image{" "}
+                      Last opp bilde{" "}
                       <FontAwesomeIcon className="h-4" icon={faCloudArrowUp} />
                     </label>
                     <input
@@ -227,12 +239,16 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       accept="image/*"
                     />
                     <span className="ml-2 text-gray-500 mt-2 mr-1 block">
-                      {imageName
-                        ? imageName.replace("C:\\fakepath\\", "")
-                        : "No file chosen"}
+                      {imageName && imageName.replace("C:\\fakepath\\", "")}
                     </span>
-                    <span className={`ml-2 ${imgNameEql ?"text-green-500": " text-red-500"} mt-2 mr-1 block`}>
-                      {imgNameEql ? "Bildenavn og navn til matretten er likt" : "Bildenavn må være samme som navn til matretten"}
+                    <span
+                      className={`ml-2 ${
+                        imgNameEql ? "text-green-500" : " text-red-500"
+                      } mt-2 mr-1 block`}
+                    >
+                      {imgNameEql
+                        ? "Bildenavn og navn til matretten er likt"
+                        : "Bildenavn må være samme som navn til matretten"}
                     </span>
                   </div>
                   <div className="col-span-2">
@@ -240,7 +256,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       htmlFor="description"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Product Description
+                      Beskrivelse
                     </label>
                     <textarea
                       id="description"
@@ -248,16 +264,17 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       maxLength="120"
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       value={createDescr}
-                      placeholder="Description, max 120 char"
+                      placeholder="Beskrivelse, max 120 char"
                       onChange={(e) => setCreateDescr(e.target.value)}
                     />
                   </div>
                 </div>
                 <button
+                  disabled={button}
                   type="submit"
                   className="text-white inline-flex items-center bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {(
+                  {
                     <svg
                       className="me-1 -ms-1 w-5 h-5"
                       fill="currentColor"
@@ -270,9 +287,9 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  )}
+                  }
 
-                  {"Add new product"}
+                  {"Opprett ny element"}
                 </button>
               </form>
             </div>

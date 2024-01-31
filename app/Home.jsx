@@ -2,11 +2,14 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import img from "../public/images/img_3.webp";
+import imgOne from "../public/images/img_home_page.png";
 import bgImage from "../public/images/bgImage_03.jpg";
 import Carousel from "../components/menyCards/Carousel";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+
   return (
     <div className={styles.body}>
       <Image src={bgImage} alt="Loading..." className={styles.bgImage} />
@@ -69,12 +72,15 @@ export default function Home() {
       </div>
       <div className={styles.thirdSection}>
         <div className={styles.carouselContainer}>
-          <a href="/meny" className={styles.infoLinkMeny}>Se alle retter</a>
-          <h3 className="text-white text-6xl  mb-16 mt-2 ml-20 ">Våre retter</h3>
-          
+          <a href="/meny" className={styles.infoLinkMeny}>
+            Se alle retter
+          </a>
+          <h3 className="text-white text-6xl  mb-16 mt-2 ml-20 ">
+            Våre retter
+          </h3>
+
           <Carousel />
         </div>
-        
       </div>
       {/* <div className={styles.fifthSection}>
         <div className={styles.fifthSectionCOntainer}>

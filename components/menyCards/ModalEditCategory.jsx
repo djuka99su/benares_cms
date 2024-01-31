@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 
 const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
   const [name, setName] = useState("");
-  const [ID, setID] = useState("")
+  const [ID, setID] = useState("");
 
   useEffect(() => {
     setName(categoryTitle);
-    setID(id)
+    setID(id);
   }, [categoryTitle]);
 
   const handleClose = () => {
@@ -57,7 +57,7 @@ const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Edit Category
+                  Rediger kategori
                 </h3>
                 <button
                   type="button"
@@ -91,14 +91,14 @@ const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
                       htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Category Name
+                      Kategori navn
                     </label>
                     <input
                       type="text"
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Type category name"
+                      placeholder="Skriv inn kategorinavn"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -124,7 +124,7 @@ const ModalEditCategory = ({ modal, closeModal, categoryTitle, id }) => {
                     </svg>
                   }
 
-                  {"Edit category"}
+                  {"Rediger kategori"}
                 </button>
               </form>
             </div>

@@ -4,7 +4,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const RemoveBtnCategory = ({ id }) => {
   const handleRemove = async () => {
-    const confirmed = confirm("Are you sure?");
+    const confirmed = confirm("Er du sikker? Trykk ok hvis du vil slette kategorien.");
 
     if (confirmed) {
       const res = await fetch(

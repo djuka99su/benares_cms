@@ -1,13 +1,8 @@
 "use client;";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import styles from "./styles.module.css";
 import { XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import ModalCategory from "../menyCards/ModalCategory";
-import ModalItem from "../menyCards/ModalItem";
-import ModalRemove from "../menyCards/ModalRemove";
 import { auth } from "../../app/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";

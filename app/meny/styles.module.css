@@ -31,6 +31,6 @@
 
   @media (max-width: 500px){
     .container, .containerTwo{
-      width: 95vw;
+      width: 100vw;
     }
   }

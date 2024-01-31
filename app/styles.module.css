@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap');
+
 .body {
   box-sizing: border-box;
 }
@@ -39,7 +41,7 @@
 }
 
 .descriptionContainer {
-  width: 40%;
+  width: 70%;
 }
 
 .description {

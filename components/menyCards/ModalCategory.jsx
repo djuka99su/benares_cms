@@ -2,14 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ModalCategory = ({ modal, closeModal  }) => {
+const ModalCategory = ({ modal, closeModal }) => {
   const [createName, setCreateName] = useState("");
   const router = useRouter();
 
   const handleClose = () => {
     closeModal();
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +53,7 @@ const ModalCategory = ({ modal, closeModal  }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Create New Category
+                  Opprett ny kategori
                 </h3>
                 <button
                   type="button"
@@ -88,14 +87,14 @@ const ModalCategory = ({ modal, closeModal  }) => {
                       htmlFor="name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Category Name
+                      Kategori navn
                     </label>
                     <input
                       type="text"
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Type category name"
+                      placeholder="Skriv inn kategorinavn"
                       value={createName}
                       onChange={(e) => setCreateName(e.target.value)}
                       required
@@ -106,7 +105,7 @@ const ModalCategory = ({ modal, closeModal  }) => {
                   type="submit"
                   className="text-white inline-flex items-center bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {(
+                  {
                     <svg
                       className="me-1 -ms-1 w-5 h-5"
                       fill="currentColor"
@@ -119,9 +118,9 @@ const ModalCategory = ({ modal, closeModal  }) => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  )}
+                  }
 
-                  {"Add new category"}
+                  {"Opprett ny kategori"}
                 </button>
               </form>
             </div>

@@ -3,34 +3,45 @@
 import { useState, useEffect, use } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload, faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Toaster, toast } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
 
-const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDescr, defCategory, defAllergens, id }) => {
-
-
+const ModalEditItem = ({
+  modal,
+  closeModal,
+  categories,
+  defName,
+  defPrice,
+  defDescr,
+  defCategory,
+  defAllergens,
+  id,
+}) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [descr, setDescr] = useState("");
   const [categoryState, setCategory] = useState("");
   const [allergensState, setAllergensState] = useState("");
   const [imageEdit, setImageEdit] = useState(null);
-  const [imageNameEdit, setImageNameEdit] = useState("");
-  const [button, setButton] = useState(true);
-  const [ID, setID] = useState("")
-
+  const [imageNameEdit, setImageNameEdit] = useState("Ingen opplastet bilde");
+  const [ID, setID] = useState("");
 
   useEffect(() => {
-    setName(defName)
-    setPrice(defPrice)
-    setDescr(defDescr)
-    setCategory(defCategory)
-    setAllergensState(defAllergens)
-    setID(id)
-  }, [defName])
-
+    setName(defName);
+    setPrice(defPrice);
+    setDescr(defDescr);
+    setCategory(defCategory);
+    setAllergensState(defAllergens);
+    setID(id);
+  }, [defName]);
 
   const handleClose = () => {
     closeModal();
   };
+
+  console.log(name);
+  console.log(imageNameEdit);
+
 
 
   const handleImageChange = (e) => {
@@ -62,7 +73,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
         method: "PUT",
         headers: {
           "Content-type": "application/json",
-        }, 
+        },
 
         body: JSON.stringify({
           newTitle: name,
@@ -71,7 +82,6 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
           newAllergens: allergensState,
           newDescription: descr,
         }),
-
       });
 
       if (res.ok) {
@@ -87,6 +97,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
 
   return (
     <>
+      <Toaster />
       {modal && (
         <div
           className="fixed inset-0 bg-black opacity-90 z-40"
@@ -110,7 +121,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
               {/* Modal header */}
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {"Edit Product"}
+                  {"Rediger element"}
                 </h3>
                 <button
                   type="button"
@@ -151,7 +162,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       name="name"
                       id="name"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder={ "Type product name"}
+                      placeholder={"Skriv in elementnavn"}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -162,14 +173,14 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       htmlFor="allergens"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Allergens
+                      Allergener
                     </label>
                     <input
                       type="text"
                       name="allergens"
                       id="allergens"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder={"Allergens"}
+                      placeholder={"Allergener"}
                       value={allergensState}
                       onChange={(e) => setAllergensState(e.target.value)}
                       required
@@ -180,14 +191,14 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       htmlFor="price"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Price
+                      Pris
                     </label>
                     <input
                       type="number"
                       name="price"
                       id="price"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder="Price in NOK"
+                      placeholder="Pris i NOK"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                       required
@@ -199,7 +210,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                         htmlFor="category"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Category
+                        Kategori
                       </label>
                       <select
                         id="category"
@@ -209,7 +220,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                         required
                       >
                         <option value="" disabled hidden>
-                          Select Category
+                          Velg kategori
                         </option>
                         {categories.map((category, index) => (
                           <option key={index} value={category.title}>
@@ -224,7 +235,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       htmlFor="imageEdit"
                       className=" w-28  bg-orange-600 p-2 rounded   text-sm font-medium cursor-pointer  text-white"
                     >
-                      Upload image{" "}
+                      Last opp bilde{" "}
                       <FontAwesomeIcon className="h-4" icon={faCloudArrowUp} />
                     </label>
                     <input
@@ -235,14 +246,9 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       type="file"
                       accept="imageEdit/*"
                     />
-                    
+
                     <span className="ml-2 text-gray-500 mt-2 mr-1 block">
-                      {imageNameEdit
-                        ? imageNameEdit.replace("C:\\fakepath\\", "")
-                        : "No file chosen"}
-                    </span>
-                    <span className="ml-2 text-red-500 mt-2 mr-1 block">
-                      Bildenavn må være samme som navn til matretten
+                      {imageNameEdit && imageNameEdit.replace("C:\\fakepath\\", "")}
                     </span>
                   </div>
                   <div className="col-span-2">
@@ -250,7 +256,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                       htmlFor="description"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Product Description
+                      Beskrivelese
                     </label>
                     <textarea
                       id="description"
@@ -267,7 +273,7 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                   type="submit"
                   className="text-white inline-flex items-center bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
-                  {(
+                  {
                     <svg
                       className="me-1 -ms-1 w-5 h-5"
                       fill="currentColor"
@@ -280,9 +286,9 @@ const ModalEditItem = ({ modal, closeModal, categories, defName, defPrice, defDe
                         clipRule="evenodd"
                       />
                     </svg>
-                  )}
+                  }
 
-                  {"Edit product"}
+                  {"Rediger element"}
                 </button>
               </form>
             </div>
