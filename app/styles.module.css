@@ -9,54 +9,24 @@
   min-width: 100vw;
   position: fixed;
   object-fit: cover;
-  z-index: -1;
+  opacity: 0.5;
+  z-index: -2;
 }
-/* Your existing styles for the background image */
+
 .home {
-  /* background-color: #0B1517; */
-  /* background-image: url("../public/images/bgImage_03.jpg"); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 110vh;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
+  gap: 0.7rem;
+  margin-left: 12vw;
 }
 
-.headingContainer {
-  width: 100%;
-  padding: 0 2rem;
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.heading {
-  font-size: 15vw;
-  font-family: "Dancing Script", cursive;
-  color: rgb(234, 88, 12);
-}
-
-.descriptionContainer {
-  width: 70%;
-}
-
-.description {
-  font-size: 2vw;
-  color: #fff;
-  /* z-index: 1; */
-  font-family: "Poppins", sans-serif;
-  position: relative;
-  text-align: center;
-  bottom: 2rem;
-}
 
 .anotherSection {
-  /* background-color: #0B1517; */
-  /* background-image: url("../public/images/bgImage_03_rotate.jpg"); */
   min-height: 100vh;
   background-size: cover;
   background-position: center;
@@ -65,7 +35,6 @@
 
 .containerOne {
   width: 90%;
-  /* height: 70%; */
   background-color: #0b1517;
   color: #fff;
   font-family: "Poppins", sans-serif;
@@ -74,7 +43,6 @@
   position: relative;
   z-index: 1;
   border-radius: 0.5rem;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -95,7 +63,6 @@
 
 .containerInfo p {
   font-size: 16px;
-  /* width: 40%; */
 }
 
 .infoHolder {
@@ -164,7 +131,6 @@
 .fourthSection {
   min-height: 100vh;
   display: flex;
-  /* justify-content: space-between; */
   background-color: #0b1517;
 }
 
@@ -247,7 +213,6 @@
 .fifthSectionCOntainer button {
   position: relative;
   background-color: #0b1517;
-  /* width: 20rem; */
   height: 5rem;
   bottom: 4rem;
   padding: 2rem;
@@ -283,7 +248,6 @@
   .containerInfo p {
     font-size: 1rem;
     text-align: center;
-    /* width: 40%; */
   }
 
   .infoHolder {
@@ -322,6 +286,15 @@
 @media (max-width: 800px) {
   .heading{
     font-size: 11rem;
+  }
+
+  .infoLinkMeny{
+    margin-left: 0;
+  }
+  
+  .home {
+    margin-left: 0;
+    padding: 1rem;
   }
 }
 
@@ -363,4 +336,5 @@
   .infoContainer a {
     width: 80%;
   }
+
 }

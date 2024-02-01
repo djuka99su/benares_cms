@@ -29,7 +29,7 @@ const Infobar = () => {
           <span>+47/999-99-999</span>
         </li>
         {authUser && <li>Velkommen <span className="underline">{authUser.email}</span></li>}
-        <li>Åpnet: Mandag-Søndag 08:00- 23:00</li>
+        <li>Åpnet: 15:00 - 23:00 (14:00 - 23:00)</li>
       </ul>
     </div>
   );

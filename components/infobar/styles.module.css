@@ -18,9 +18,10 @@
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
     margin: auto 14rem;
-    color:#0B1517;
+    /* color:#0B1517; */
+    color: #fff;
     font-size: 0.7rem;
-    font-weight: bold;
+    /* font-weight: bold; */
 
 }
 

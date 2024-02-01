@@ -2,26 +2,18 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import img from "../public/images/img_3.webp";
-import imgOne from "../public/images/img_home_page.png";
-import bgImage from "../public/images/bgImage_03.jpg";
+import bgImage from "../public/images/imgTwo_home.jpg";
 import Carousel from "../components/menyCards/Carousel";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-
-
   return (
     <div className={styles.body}>
       <Image src={bgImage} alt="Loading..." className={styles.bgImage} />
       <div className={styles.home}>
-        <div className={styles.headingContainer}>
-          <h1 className={styles.heading}>Benares</h1>
-        </div>
-        <div className={styles.descriptionContainer}>
-          <p className={styles.description}>
-            Kom og opplev indisk matglede og atmosfære i vår restaurant
-          </p>
-        </div>
+       
+        <p className="m-0 text-lime-400 text-center sm:text-left font-bold text-lg sm:text-2xl z-10">KOM OG OPPLEV INDISK MATGLEDE</p>
+        <h1 className="text-5xl text-center sm:text-left sm:text-8xl text-orange-100 font-bold z-10">Velkommen til <br/> Benares</h1>
       </div>
       <div className={styles.anotherSection}>
         <div className={styles.containerOne}>
@@ -75,7 +67,7 @@ export default function Home() {
           <a href="/meny" className={styles.infoLinkMeny}>
             Se alle retter
           </a>
-          <h3 className="text-white text-6xl  mb-16 mt-2 ml-20 ">
+          <h3 className="text-white text-4xl md:text-6xl  mb-16 mt-2 ml-0 md:ml-20 ">
             Våre retter
           </h3>
 
