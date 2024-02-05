@@ -5,8 +5,15 @@ import img from "../public/images/img_3.webp";
 import bgImage from "../public/images/imgTwo_home.jpg";
 import Carousel from "../components/menyCards/Carousel";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import("locomotive-scroll")).default;
+      const locomotiveScroll = new LocomotiveScroll();
+    })();
+  }, []);
   return (
 
       <div className={styles.body}>

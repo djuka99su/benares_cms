@@ -6,12 +6,6 @@ import DropdownSeciton from "./DropdownSection";
 import { motion } from "framer-motion";
 
 const ContainerOne = () => {
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      const locomotiveScroll = new LocomotiveScroll();
-    })();
-  }, []);
 
   return (
     <motion.div
