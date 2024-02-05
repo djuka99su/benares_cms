@@ -58,7 +58,9 @@ export default function Home() {
           </div>
         </motion.div>
         <div className={styles.fourthSection}>
-          <img
+          <Image
+            width={2000}
+            height={2000}
             src="/images/meny/img_meny.jpg"
             className={styles.fourthSectionImage}
             alt="Loading"
