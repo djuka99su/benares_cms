@@ -18,6 +18,8 @@ import RemoveBtn from "../../components/menyCards/RemoveBtn";
 import RemoveBtnCategory from "../../components/menyCards/RemoveBtnCategory";
 import ModalEditItem from "../../components/menyCards/ModalEditItem";
 import ModalEditCategory from "../../components/menyCards/ModalEditCategory";
+import bgImage from "../../public/images/imgTwo_home.jpg";
+import Image from "next/image";
 
 
 
@@ -123,6 +125,7 @@ const Meny = () => {
 
   return (
     <div className="min-h-screen">
+      <Image src={bgImage} alt="Loading..." className={styles.bgImage} />
       {!loading ? (
         <div className="text-white absolute top-1/2 left-1/2">
           <div role="status">
@@ -148,7 +151,7 @@ const Meny = () => {
         categories.map((category, ic) => (
           <div
             key={ic}
-            className={ic === 0 ? styles.container : styles.containerTwo}
+            className={ic === 0 ? styles.container : ic=== 1 ? styles.containerTwo : styles.containerThree}
           >
             <div className="flex gap-2 flex-col md:flex-row">
               <h2 className="p-4 my-4 md:my-0 text-4xl md:text-6xl text-center md:text-left">

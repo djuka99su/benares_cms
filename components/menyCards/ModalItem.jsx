@@ -22,6 +22,14 @@ const ModalItem = ({ modal, closeModal, categories }) => {
 
   const handleClose = () => {
     closeModal();
+    setCreateName("");
+    setCreatePrice("");
+    setCreateDescr("");
+    setCategory("");
+    setAllergensState("");
+    setImage(null);
+    setImageName("Ingen opplastet bilde");
+    setImgNameEql(false);
   };
 
   const handleImageChange = (e) => {
@@ -41,8 +49,10 @@ const ModalItem = ({ modal, closeModal, categories }) => {
     e.preventDefault();
 
     if (!imgNameEql) {
-      toast.error("Bildenavn og navn til matretten er ikke likt. Dette må fikses!")
-      return
+      toast.error(
+        "Bildenavn og navn til matretten er ikke likt. Dette må fikses!"
+      );
+      return;
     }
 
     if (!image) return;
@@ -247,7 +257,7 @@ const ModalItem = ({ modal, closeModal, categories }) => {
                       } mt-2 mr-1 block`}
                     >
                       {imgNameEql
-                        ? "Bildenavn og navn til matretten er likt"
+                        ? "Bildenavn og navn på retten er det samme"
                         : "Bildenavn må være samme som navn til matretten"}
                     </span>
                   </div>
