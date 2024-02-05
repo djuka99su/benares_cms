@@ -186,9 +186,7 @@ const Meny = () => {
                       } pb-6`}
                     >
                       <div className="flex flex-col md:flex-row">
-                        <Image
-                          width={300}
-                          height={300}
+                        <img
                           onClick={handleImageClick}
                           className={`w-full h-36 md:w-48 md:h-32 m-auto md:mx-4 rounded w ${
                             size
@@ -289,8 +287,7 @@ const Meny = () => {
           >
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <Image width={1000}
-            height={1000}
+          <img
             name="image"
             src={imageUrl}
             className="w-full h-full rounded"
