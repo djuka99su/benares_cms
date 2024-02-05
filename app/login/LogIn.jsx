@@ -34,7 +34,7 @@ const LogIn = () => {
       if (user) {
         router.push("/");
       }
-    });
+    }, []);
 
     return () => {
       listen();

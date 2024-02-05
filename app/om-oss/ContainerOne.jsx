@@ -1,16 +1,21 @@
 "use client";
 
-import { React } from "react";
+import { React, useEffect } from "react";
 import styles from "./styles.module.css";
 import DropdownSeciton from "./DropdownSection";
 import { motion } from "framer-motion";
 
 const ContainerOne = () => {
+  useEffect(() => {
+    (async () => {
+      const LocomotiveScroll = (await import("locomotive-scroll")).default;
+      const locomotiveScroll = new LocomotiveScroll();
+    })();
+  }, []);
 
   return (
     <motion.div
       className={styles.containerOne}
-
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exist={{ opacity: 0, y: 15 }}

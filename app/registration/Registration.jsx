@@ -23,7 +23,7 @@ const Registration = () => {
       if (user) {
         router.push("/");
       }
-    });
+    }, []);
 
 
     return () => {
