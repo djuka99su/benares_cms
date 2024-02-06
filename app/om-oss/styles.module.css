@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 .body {
-  min-height: 160vh;
+  height: 400vh;
   font-family: "Poppins", sans-serif;
 }
 
@@ -26,6 +26,5 @@
   border-radius: 0.5rem;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  position: relative;
-  top: 9rem;
 }
+

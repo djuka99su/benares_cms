@@ -12,8 +12,9 @@ const page = () => {
   return (
       <div  >
         <Image src={bgImage} alt="Loading..." className={styles.bgImageLogin} />
+        <div className="mb-32 opacity-0">a</div>
         <ContainerOne />
-        <MenyLabel />
+        {/* <MenyLabel /> */}
       </div>
   );
 };

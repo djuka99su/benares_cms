@@ -2,6 +2,7 @@
 import { React, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import styles from "./styles.module.css"
 
 const DropdownSection = () => {
   const [showBtnOne, setShowBtnOne] = useState(false);
@@ -31,26 +32,21 @@ const DropdownSection = () => {
   };
   return (
     <div>
-      <div className="flex gap-10 p-10 sm:p-20 flex-col sm:flex-row">
+      <div className={`flex gap-10 p-10 sm:p-20 flex-col sm:flex-row`}>
         <div>
           <h2
             className="text-center text-orange-600 mb-2 flex gap-2 justify-center items-center"
             onClick={handleShowButtonOne}
           >
-            2019{" "}
-            {showBtnOne ? (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronUp}
-              />
-            ) : (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronDown}
-              />
-            )}{" "}
+            2019
+            <FontAwesomeIcon
+              className={`w-4 cursor-pointer ${
+                showBtnOne && "rotate-180"
+              }  block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110`}
+              icon={faChevronDown}
+            />{" "}
           </h2>
-          <p className={`${showBtnOne ? "block" : "hidden"} sm:block`}>
+          <p className={`${showBtnOne ? "block" : "hidden"} sm:block text-center `}>
             Et år med blomstrende vekst for indiske restauranter i India, drevet
             av økende interesse og etterspørsel etter autentisk indisk mat.
             Lokale kulinariske opplevelser ble stadig mer populære, og bransjen
@@ -59,23 +55,18 @@ const DropdownSection = () => {
         </div>
         <div>
           <h2
-            className="text-center text-orange-600 mb-2 flex gap-2 justify-center items-center"
+            className={`text-center text-orange-600 mb-2 flex gap-2 justify-center items-center`}
             onClick={handleShowButtonTwo}
           >
             2020{" "}
-            {showBtnTwo ? (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronUp}
-              />
-            ) : (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronDown}
-              />
-            )}{" "}
+            <FontAwesomeIcon
+              className={`w-4 cursor-pointer  ${
+                showBtnTwo && "rotate-180"
+              } block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110`}
+              icon={faChevronDown}
+            />{" "}
           </h2>
-          <p className={`${showBtnTwo ? "block" : "hidden"} sm:block `}>
+          <p className={`${showBtnTwo ? "block" : "hidden"} sm:block text-center `}>
             I 2020 ble imidlertid veksten utfordret av den globale pandemien.
             Restriksjoner og nedstengninger påvirket restaurantvirksomheten, men
             mange tilpasset seg ved å tilby takeout og leveringstjenester for å
@@ -88,19 +79,14 @@ const DropdownSection = () => {
             onClick={handleShowButtonThree}
           >
             2021{" "}
-            {showBtnThree ? (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronUp}
-              />
-            ) : (
-              <FontAwesomeIcon
-                className="w-4 cursor-pointer block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110"
-                icon={faChevronDown}
-              />
-            )}{" "}
+            <FontAwesomeIcon
+              className={`w-4 cursor-pointer ${
+                showBtnThree && "rotate-180"
+              } block sm:hidden transition-transform duration-200 ease-in-out hover:scale-110`}
+              icon={faChevronDown}
+            />{" "}
           </h2>
-          <p className={`${showBtnThree ? "block" : "hidden"} sm:block`}>
+          <p className={`${showBtnThree ? "block" : "hidden"} sm:block text-center`}>
             Året 2021 markerte en oppadgående trend for indiske restauranter.
             Med gradvis lettelser i restriksjoner og en økende tillit til å
             spise ute, opplevde bransjen en revitalisering. Innovasjon i

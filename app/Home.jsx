@@ -22,7 +22,6 @@ export default function Home() {
           className={styles.home}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
-          exist={{ opacity: 0, x: -15 }}
         >
           <p className="m-0 text-lime-400 text-center sm:text-left font-bold text-lg sm:text-2xl z-10">
             KOM OG OPPLEV INDISK MATGLEDE
@@ -35,8 +34,6 @@ export default function Home() {
           className={styles.anotherSection}
           initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
-          exist={{ opacity: 0, x: -15 }}
-          // transition={{delay:0.25}}
         >
           <div className={styles.containerOne}>
             <h2>Litt om oss</h2>
