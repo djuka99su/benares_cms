@@ -33,7 +33,7 @@ const DropdownSection = () => {
   return (
     <div>
       <div className={`flex gap-10 p-10 sm:p-20 flex-col sm:flex-row`}>
-        <div>
+        <div className="flex-1">
           <h2
             className="text-center text-orange-600 mb-2 flex gap-2 justify-center items-center"
             onClick={handleShowButtonOne}
@@ -53,7 +53,7 @@ const DropdownSection = () => {
             opplevde en positiv trend.
           </p>
         </div>
-        <div>
+        <div className="flex-1">
           <h2
             className={`text-center text-orange-600 mb-2 flex gap-2 justify-center items-center`}
             onClick={handleShowButtonTwo}
@@ -73,7 +73,7 @@ const DropdownSection = () => {
             møte kundenes behov under vanskelige forhold.
           </p>
         </div>
-        <div>
+        <div className="flex-1">
           <h2
             className="text-center text-orange-600 mb-2 flex gap-2 justify-center items-center"
             onClick={handleShowButtonThree}
